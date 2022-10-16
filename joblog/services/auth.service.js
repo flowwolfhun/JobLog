@@ -9,11 +9,12 @@ module.exports = {
     actions: {
 		login:{
 			rest: {
-				method:'POST',
-				path:'/login'
+				method:["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+				path:'/login',
+				allowedHeaders: "*"
 			},
 			async handler (ctx){
-				DatabaseModule.checkUser(ctx.email, ctx.password);
+				return DatabaseModule.checkUser(ctx.params.email, ctx.params.password);
 			}
 		}
     }
