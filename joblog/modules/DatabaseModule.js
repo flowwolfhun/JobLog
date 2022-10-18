@@ -1,5 +1,6 @@
 "use strict";
 const {Sequelize, Model, DataTypes} = require('sequelize');
+var crypto = require('crypto');
 const sequelize = new Sequelize("joblog", 'simpleflow', 'simpleflow', {
     host: "localhost",
     port: 1433,
@@ -38,10 +39,11 @@ class DatabaseModule {
     }
 
     async checkUser (email, password) {
+      let passwordHash = crypto.createHash('md5').update(password).digest('hex');
         let res = await this.User.findAll({
             where:{
                 Email: email,
-                Password: password
+                Password: passwordHash
             }
         });
         return res.length>0;

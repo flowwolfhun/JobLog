@@ -18,6 +18,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './menuitems';
 import Button from '@mui/material/Button';
 import {Login} from './Login'
+import {Registration} from './Registration'
 
 const drawerWidth = 240;
 class Layout extends React.Component {
@@ -25,21 +26,59 @@ class Layout extends React.Component {
   constructor(props){
     super(props);
     this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.state = {isLoggedIn: false};
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.handleRegistrationClick = this.handleRegistrationClick.bind(this);
+    this.handler = this.handler.bind(this);
+    this.state = {isLoggedIn: false, menu:'layout'};
   }
 
   handleLoginClick() {
-    this.setState({isLoggedIn: !this.state.isLoggedIn});
+    this.setState({menu: 'login'});
+  }
+  handleLogoutClick(){
+    this.setState({isLoggedIn: false, menu:'logout'})
+  }
+
+  handler(loggedIn){
+    this.setState({isLoggedIn: loggedIn, menu:'layout'})
+  }
+  handleRegistrationClick(){
+    this.setState({ menu:'registration'})
+
   }
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
+    const menu = this.state.menu;
     let content ;
-    if(isLoggedIn){
-       content = <Login></Login>;
+    let loginButton;
+    let registration;
+    let timeRecordMenu;
+    let projectMenu;
+    let companyMenu;
+    if(!isLoggedIn){       
+       loginButton = <Button color="inherit" onClick={this.handleLoginClick}>Login</Button>
+       registration = <Button color="inherit" onClick={this.handleRegistrationClick}>Registration</Button>
     }
     else{
-       content = <div>logged out</div>
+       loginButton = <Button color="inherit" onClick={this.handleLogoutClick}>Logout</Button>
+       timeRecordMenu = <Button color="inherit" onClick={()=>this.setState({menu:'timeRecordMenu'})}>TimeRecord</Button>
+       projectMenu = <Button color="inherit" onClick={()=>this.setState({menu:'projectMenu'})}>Project</Button>
+       companyMenu = <Button color="inherit" onClick={()=>this.setState({menu:'companyMenu'})}>Company</Button>
+    }
+    switch (menu){
+      case 'layout':
+        content = <div>Layout</div>
+        break;
+      case 'login':
+        content = <Login handler={this.handler} ></Login>;
+        break;
+      case 'logout':
+        content = <div>logged out</div>
+        break;
+      case 'registration':
+        content = <Registration handler={this.handler}></Registration>
+        break;
     }
     return (
       <div>
@@ -57,7 +96,11 @@ class Layout extends React.Component {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          <Button color="inherit" onClick={this.handleLoginClick}>Login</Button>
+          {timeRecordMenu}
+          {projectMenu}
+          {companyMenu}
+          {registration}
+          {loginButton}
         </Toolbar>
       </AppBar>
       <br/>

@@ -12,7 +12,7 @@ const theme = createTheme({
   
   palette: {
     background: {
-      default: "#aaa"
+      default: "#ddd"
     },
     primary: {
       main: red[500],
