@@ -4,6 +4,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { CommonUtil } from '../util/CommonUtil';
+import { Localize}  from '../localize/Localization';
 class Registration extends React.Component {
     handler=null;
     constructor(props){        
@@ -49,15 +50,15 @@ class Registration extends React.Component {
       noValidate
       autoComplete="off"
     >
-                <TextField id="login_email" label="Email" variant="outlined" value={this.state.email} onChange={this.handleChange}  />
-                <TextField id="login_password" label="password" variant="outlined" type="password" value={this.state.password} onChange={this.handleChangePassword} />
-                <TextField id="login_password2" label="password" variant="outlined" type="password" value={this.state.password2} onChange={this.handleChangePassword2} />
+                <TextField id="login_email" label={Localize.email}  variant="outlined" value={this.state.email} onChange={this.handleChange}  />
+                <TextField id="login_password" label={Localize.password}  variant="outlined" type="password" value={this.state.password} onChange={this.handleChangePassword} />
+                <TextField id="login_password2" label={Localize.password2} variant="outlined" type="password" value={this.state.password2} onChange={this.handleChangePassword2} />
                 <FormGroup>
-                  <FormControlLabel control={<Checkbox checked={this.state.aszf} onChange={()=>{this.setState({aszf:!this.state.aszf})}} />} label="ASZF" />
-                  <FormControlLabel control={<Checkbox checked={this.state.gdpr} onChange={()=>{this.setState({gdpr:!this.state.gdpr})}}/>} label="GDPR" />
+                  <FormControlLabel control={<Checkbox checked={this.state.aszf} onChange={()=>{this.setState({aszf:!this.state.aszf})}} />} label={Localize.licence} />
+                  <FormControlLabel control={<Checkbox checked={this.state.gdpr} onChange={()=>{this.setState({gdpr:!this.state.gdpr})}}/>} label={Localize.gdpr}  />
                 </FormGroup>
                 {regErr}
-                <Button variant="outlined" onClick={this.registrationClick}>Registration</Button>
+                <Button variant="outlined" onClick={this.registrationClick}>{Localize.registration}</Button>
                 </Box>
                 </Container>
             
@@ -68,16 +69,16 @@ class Registration extends React.Component {
     async registrationClick(){
       let regerrors = [];
       if(!this.state.aszf){
-        regerrors.push('ASZF -et el kell fogadni');
+        regerrors.push(Localize.licenceNotAccapted);
       }
       if(!this.state.gdpr){
-        regerrors.push('GDPR -et el kell fogadni');
+        regerrors.push(Localize.gdprNotAccepted);
       }
-      if(this.state.password != this.state.password2){
-        regerrors.push('Két jelszó nem egyezik');
+      if(this.state.password !== this.state.password2){
+        regerrors.push(Localize.passwordNotSame);
       }
       if(this.state.password.length<6){
-        regerrors.push('A jelszó legalább 6 hosszú kell, hogy legyen');
+        regerrors.push(Localize.passwordTooShort);
       }
       if(regerrors){
         this.setState({registrationError:regerrors});

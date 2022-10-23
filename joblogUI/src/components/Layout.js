@@ -19,6 +19,7 @@ import { mainListItems, secondaryListItems } from './menuitems';
 import Button from '@mui/material/Button';
 import {Login} from './Login'
 import {Registration} from './Registration'
+import { Localize}  from '../localize/Localization';
 
 const drawerWidth = 240;
 class Layout extends React.Component {
@@ -57,11 +58,11 @@ class Layout extends React.Component {
     let projectMenu;
     let companyMenu;
     if(!isLoggedIn){       
-       loginButton = <Button color="inherit" onClick={this.handleLoginClick}>Login</Button>
-       registration = <Button color="inherit" onClick={this.handleRegistrationClick}>Registration</Button>
+       loginButton = <Button color="inherit" onClick={this.handleLoginClick}>{Localize.menu.login}</Button>
+       registration = <Button color="inherit" onClick={this.handleRegistrationClick}>{Localize.menu.registration}</Button>
     }
     else{
-       loginButton = <Button color="inherit" onClick={this.handleLogoutClick}>Logout</Button>
+       loginButton = <Button color="inherit" onClick={this.handleLogoutClick}>{Localize.menu.logout}</Button>
        timeRecordMenu = <Button color="inherit" onClick={()=>this.setState({menu:'timeRecordMenu'})}>TimeRecord</Button>
        projectMenu = <Button color="inherit" onClick={()=>this.setState({menu:'projectMenu'})}>Project</Button>
        companyMenu = <Button color="inherit" onClick={()=>this.setState({menu:'companyMenu'})}>Company</Button>
@@ -94,7 +95,7 @@ class Layout extends React.Component {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+          {Localize.menu.news}
           </Typography>
           {timeRecordMenu}
           {projectMenu}

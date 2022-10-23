@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button , TextField, Container, Box} from '@mui/material';
 import { CommonUtil } from '../util/CommonUtil';
+import { Localize}  from '../localize/Localization';
 class Login extends React.Component {
     handler=null;
     constructor(props){        
@@ -37,10 +38,10 @@ class Login extends React.Component {
       noValidate
       autoComplete="off"
     >
-                <TextField id="login_email" label="Email" variant="outlined" value={this.state.email} onChange={this.handleChange}  />
-                <TextField id="login_password" label="password" variant="outlined" type="password" value={this.state.password} onChange={this.handleChangePassword} />               
+                <TextField id="login_email" label={Localize.email} variant="outlined" value={this.state.email} onChange={this.handleChange}  />
+                <TextField id="login_password" label={Localize.password} variant="outlined" type="password" value={this.state.password} onChange={this.handleChangePassword} />               
                 {badlogin}
-                <Button variant="outlined" onClick={this.loginClick}>Belépés</Button>
+                <Button variant="outlined" onClick={this.loginClick}>{Localize.login}</Button>
                 </Box>
                 </Container>
             
