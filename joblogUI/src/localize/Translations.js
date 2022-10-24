@@ -20,7 +20,8 @@ exports.Translations = {
             project: "Projekt",
             company: "Társaság"
 
-        }
+        },
+        alreadyRegistered:'Ezzel az email címmel már regisztráltak korábban'
     },
     en:{
         login:"Login",

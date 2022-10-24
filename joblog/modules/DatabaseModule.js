@@ -31,22 +31,38 @@ class DatabaseModule {
         timestamps: false //Ez lehet jobb lenne ha lenne
       });
 
-    CreateUser (email, password) {
-        this.User.create({
-            Email: email,
-            Password: password
-        });
-    }
-
     async checkUser (email, password) {
       let passwordHash = crypto.createHash('md5').update(password).digest('hex');
         let res = await this.User.findAll({
             where:{
                 Email: email,
-                Password: passwordHash
+                Password: passwordHash,
+                Enabled: true
             }
         });
         return res.length>0;
+    }
+
+    async registration (email, password) {
+      let isExists = (await this.User.findAll({
+        where:{
+            Email: email,
+            Enabled:true
+        }
+      })).length>0;
+      if(!isExists){
+        let passwordHash = crypto.createHash('md5').update(password).digest('hex');
+          let res = await this.User.create({
+                Email: email,
+                Password: passwordHash,
+                Enabled:true
+              
+          });
+          return 'ok';
+      }
+      else{
+        return 'alreadyRegistered'
+      }
     }
 }
 

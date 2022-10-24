@@ -80,18 +80,21 @@ class Registration extends React.Component {
       if(this.state.password.length<6){
         regerrors.push(Localize.passwordTooShort);
       }
-      if(regerrors){
+      if(regerrors.length>0){
         this.setState({registrationError:regerrors});
       }
       else{
         CommonUtil.postData('http://localhost:3001/api/auth/registration', { 'email': this.state.email, 'password': this.state.password })
   .then((data) => {
-    if(data)
+    if(data==='ok')
     {
-      this.handler(data);
+      this.handler(true);
     }
     else{
-      this.setState({incorrentLogin: true})
+      if(data==='alreadyRegistered'){
+        regerrors.push(Localize.alreadyRegistered)
+      }
+      this.setState({registrationError:regerrors})
     }
     //console.log(data); // JSON data parsed by `data.json()` call
   });

@@ -16,7 +16,18 @@ module.exports = {
 			async handler (ctx){
 				return DatabaseModule.checkUser(ctx.params.email, ctx.params.password);
 			}
-		}
+		},
+
+		registration: {
+			rest: {
+				method:["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+				path:'/registration',
+				allowedHeaders: "*"
+			},
+			async handler (ctx){
+			return DatabaseModule.registration(ctx.params.email, ctx.params.password);
+			}
+		}		
     }
 }
 
