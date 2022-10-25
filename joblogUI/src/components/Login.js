@@ -50,7 +50,7 @@ class Login extends React.Component {
 
     
     async loginClick(){
-        CommonUtil.postData('http://localhost:3001/api/auth/login', { 'email': this.state.email, 'password': this.state.password })
+        CommonUtil.postData('http://localhost:3001/auth', { 'email': this.state.email, 'password': this.state.password })
   .then((data) => {
     if(data)
     {

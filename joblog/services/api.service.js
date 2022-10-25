@@ -20,23 +20,33 @@ module.exports = {
 
 		// Exposed IP
 		ip: "0.0.0.0",
-
-		// Global Express middlewares. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Middlewares
-		use: [],
 		cors: {
+            // Configures the Access-Control-Allow-Origin CORS header.
             origin: "*",
+            // Configures the Access-Control-Allow-Methods CORS header. 
             methods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
-            allowedHeaders: "*",
+            // Configures the Access-Control-Allow-Headers CORS header.
+            allowedHeaders: ["*"],
+            // Configures the Access-Control-Expose-Headers CORS header.
             exposedHeaders: [],
+            // Configures the Access-Control-Allow-Credentials CORS header.
             credentials: false,
+            // Configures the Access-Control-Max-Age CORS header.
             maxAge: 3600
         },
+		// Global Express middlewares. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Middlewares
+		use: [],
 		routes: [
 			{
 				path: "/api",
+				cors: {
+					origin: ["*"],
+					methods: ["GET", "OPTIONS", "POST"],
+					credentials: true
+				},
 
 				whitelist: [
-					"**"
+					"*"
 				],
 
 				// Route-level Express middlewares. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Middlewares
@@ -49,15 +59,13 @@ module.exports = {
 				authentication: false,
 
 				// Enable authorization. Implement the logic into `authorize` method. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Authorization
-				authorization: false,
+				authorization: true,
 
 				// The auto-alias feature allows you to declare your route alias directly in your services.
 				// The gateway will dynamically build the full routes from service schema.
 				autoAliases: true,
 
-				aliases: {
-
-				},
+				aliases: { "POST /auth": "auth.login" },
 
 				/** 
 				 * Before call hook. You can check the request.
@@ -71,6 +79,8 @@ module.exports = {
 				onBeforeCall(ctx, route, req, res) {
 					// Set request headers to context meta
           			res.cookies = new Cookies(req, res);
+					  const cookieHeader = req.headers?.cookie;
+					let un = res.cookies.get('username');
 					//ctx.meta.cookies = res.cookies.get("usertoken");
 					ctx.meta.cookies = {};
 					ctx.meta.userAgent = req.headers["user-agent"];

@@ -10,14 +10,18 @@ module.exports = {
     actions: {
 		login:{
 			rest: {
+				origin: "*",
 				method:["GET", "OPTIONS", "POST", "PUT", "DELETE"],
 				path:'/login',
-				allowedHeaders: "*"
+				allowedHeaders: "*",
+				exposedHeaders: [],
+				credentials: false,
+				maxAge: 3600
 			},
 			async handler (ctx){
 				let allow = DatabaseModule.checkUser(ctx.params.email, ctx.params.password);
 				if(allow){
-					ctx.meta.cookies.usertoken = {"usertoken": uuid.v1()};
+					ctx.meta.cookies.usertoken = {"usertoken": 'asdsadasd'/*uuid.v1()*/};
 				}
 				return allow;
 				/*
