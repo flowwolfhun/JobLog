@@ -1,6 +1,7 @@
 "use strict";
 
 const ApiGateway = require("moleculer-web");
+const Cookies = require("cookies");
 
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
@@ -66,10 +67,14 @@ module.exports = {
 				 * @param {ServerResponse} res 
 				 * @param {Object} data
 				 * 
+				 */
 				onBeforeCall(ctx, route, req, res) {
 					// Set request headers to context meta
+          			res.cookies = new Cookies(req, res);
+					//ctx.meta.cookies = res.cookies.get("usertoken");
+					ctx.meta.cookies = {};
 					ctx.meta.userAgent = req.headers["user-agent"];
-				}, */
+				}, 
 
 				/**
 				 * After call hook. You can modify the data.
@@ -78,10 +83,15 @@ module.exports = {
 				 * @param {IncomingRequest} req 
 				 * @param {ServerResponse} res 
 				 * @param {Object} data
+				 * */
 				onAfterCall(ctx, route, req, res, data) {
 					// Async function which return with Promise
-					return doSomething(ctx, res, data);
-				}, */
+					//return doSomething(ctx, res, data);
+					if (ctx.meta.cookies) {
+						res.cookies.set("usertoken", ctx.meta.cookies.usertoken.usertoken);
+					  }
+					return data;
+				}, 
 
 				// Calling options. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Calling-options
 				callingOptions: {},

@@ -2,6 +2,7 @@
 
 const ApiGateway = require("moleculer-web");
 const DatabaseModule = require('../modules/DatabaseModule')
+var uuid = require('uuid');
 
 module.exports = {
 	name: "auth",
@@ -14,7 +15,15 @@ module.exports = {
 				allowedHeaders: "*"
 			},
 			async handler (ctx){
-				return DatabaseModule.checkUser(ctx.params.email, ctx.params.password);
+				let allow = DatabaseModule.checkUser(ctx.params.email, ctx.params.password);
+				if(allow){
+					ctx.meta.cookies.usertoken = {"usertoken": uuid.v1()};
+				}
+				return allow;
+				/*
+https://github.com/moleculerjs/moleculer-web/issues/117
+https://codesandbox.io/s/pn2yf?file=/services/api.service.js:736-832
+				*/
 			}
 		},
 
