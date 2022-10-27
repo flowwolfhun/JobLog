@@ -1,6 +1,22 @@
 
 class CommonUtil  {
     async postData(url = '', data = {}) {
+/*
+      new Promise ((resolve, reject) =>{
+      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        xmlhttp.open("POST", url);
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader("usertoken", "asdasdasd")
+        xmlhttp.send(JSON.stringify(data));
+        xmlhttp.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            callback(xhr.response);
+          }
+        }
+      })
+      .then
+      ;
+*/
 
       document.cookie = "username=John Doe";
         // Default options are marked with *
@@ -11,7 +27,8 @@ class CommonUtil  {
          // credentials: 'include', //'same-origin', // include, *same-origin, omit
           headers: {
             'Access-Control-Allow-Origin':'*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "saassadas": "asdsadas"
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
           //redirect: 'follow', // manual, *follow, error
@@ -19,6 +36,7 @@ class CommonUtil  {
           body: JSON.stringify(data) // body data type must match "Content-Type" header
         });
         return response.json(); // parses JSON response into native JavaScript objects
+        
       }
 }
 
