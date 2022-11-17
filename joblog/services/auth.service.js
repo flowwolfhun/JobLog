@@ -1,8 +1,7 @@
 "use strict";
 
 const ApiGateway = require("moleculer-web");
-const DatabaseModule = require('../modules/DatabaseModule')
-var uuid = require('uuid');
+const AuthModule = require("../modules/AuthModule")
 
 module.exports = {
 	name: "auth",
@@ -19,11 +18,8 @@ module.exports = {
 				maxAge: 3600
 			},
 			async handler (ctx){
-				let allow = DatabaseModule.checkUser(ctx.params.email, ctx.params.password);
-				if(allow){
-					ctx.meta.cookies.usertoken = {"usertoken": 'asdsadasd'/*uuid.v1()*/};
-				}
-				return allow;
+				return AuthModule.login(ctx.params.email, ctx.params.password)
+				//return allow;
 				/*
 https://github.com/moleculerjs/moleculer-web/issues/117
 https://codesandbox.io/s/pn2yf?file=/services/api.service.js:736-832
@@ -38,7 +34,7 @@ https://codesandbox.io/s/pn2yf?file=/services/api.service.js:736-832
 				allowedHeaders: "*"
 			},
 			async handler (ctx){
-			return DatabaseModule.registration(ctx.params.email, ctx.params.password);
+				return AuthModule.registration(ctx.params.email, ctx.params.password);				
 			}
 		}		
     }

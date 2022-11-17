@@ -40,7 +40,12 @@ class DatabaseModule {
                 Enabled: true
             }
         });
-        return res.length>0;
+        if(res.length>0){
+          return res[0].ID;
+        }
+        else {
+          return null;
+        }
     }
 
     async registration (email, password) {
@@ -58,10 +63,10 @@ class DatabaseModule {
                 Enabled:true
               
           });
-          return 'ok';
+          return {result: 'ok', id : res.ID};
       }
       else{
-        return 'alreadyRegistered'
+        return {result: 'alreadyRegistered', id:null}
       }
     }
 }

@@ -78,12 +78,16 @@ module.exports = {
 				 */
 				onBeforeCall(ctx, route, req, res) {
 					// Set request headers to context meta
-          			res.cookies = new Cookies(req, res);
-					  const cookieHeader = req.headers?.cookie;
-					let un = res.cookies.get('username');
+          			//res.cookies = new Cookies(req, res);
+					  //const cookieHeader = req.headers?.cookie;
+					//let un = res.cookies.get('username');
 					//ctx.meta.cookies = res.cookies.get("usertoken");
-					ctx.meta.cookies = {};
-					ctx.meta.userAgent = req.headers["user-agent"];
+					//ctx.meta.cookies = {};
+					var token  = req.headers["usertoken"];
+					//turn back if not allowed
+					//login registration... (whitelist)
+
+					
 				}, 
 
 				/**
@@ -97,9 +101,10 @@ module.exports = {
 				onAfterCall(ctx, route, req, res, data) {
 					// Async function which return with Promise
 					//return doSomething(ctx, res, data);
-					if (ctx.meta.cookies) {
+				/*	if (ctx.meta.cookies) {
 						res.cookies.set("usertoken", ctx.meta.cookies.usertoken.usertoken);
 					  }
+					  */
 					return data;
 				}, 
 

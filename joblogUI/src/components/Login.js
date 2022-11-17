@@ -52,9 +52,10 @@ class Login extends React.Component {
     async loginClick(){
         CommonUtil.postData('http://localhost:3001/api/auth/login', { 'email': this.state.email, 'password': this.state.password })
   .then((data) => {
-    if(data)
+    if(data!=='forbidden')
     {
-      this.handler(data);
+      document.cookie = "usertoken="+data;
+      this.handler(true);
     }
     else{
       this.setState({incorrentLogin: true})
