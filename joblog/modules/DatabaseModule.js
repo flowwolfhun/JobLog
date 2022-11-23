@@ -15,6 +15,8 @@ const sequelize = new Sequelize("joblog", 'simpleflow', 'simpleflow', {
     }
   });
 
+  const CompanyModel = require('./models/CompanyModel');
+
 class DatabaseModule {
     User = sequelize.define('User',{
         ID:{
@@ -31,6 +33,20 @@ class DatabaseModule {
         timestamps: false //Ez lehet jobb lenne ha lenne
       });
 
+    definedCompany = sequelize.define('Company',{
+    ID:{
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+      },
+    Name: DataTypes.STRING
+}, 
+{
+    freezeTableName: true,
+    timestamps: false //Ez lehet jobb lenne ha lenne
+  });
+
+  Company = new CompanyModel(this.definedCompany);
     async checkUser (email, password) {
       let passwordHash = crypto.createHash('md5').update(password).digest('hex');
         let res = await this.User.findAll({

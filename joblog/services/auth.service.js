@@ -5,7 +5,7 @@ const AuthModule = require("../modules/AuthModule")
 
 module.exports = {
 	name: "auth",
-	mixins: [ApiGateway],
+//	mixins: [ApiGateway],
     actions: {
 		login:{
 			rest: {

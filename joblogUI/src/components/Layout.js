@@ -20,6 +20,7 @@ import Button from '@mui/material/Button';
 import {Login} from './Login'
 import {Registration} from './Registration'
 import { Localize}  from '../localize/Localization';
+import {CompanyList} from './CompanyList'
 
 const drawerWidth = 240;
 class Layout extends React.Component {
@@ -79,6 +80,9 @@ class Layout extends React.Component {
         break;
       case 'registration':
         content = <Registration handler={this.handler}></Registration>
+        break;
+      case 'companyMenu':
+        content = <CompanyList handler={this.handler}></CompanyList>
         break;
     }
     return (

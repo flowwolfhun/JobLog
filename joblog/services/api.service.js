@@ -65,7 +65,7 @@ module.exports = {
 				// The gateway will dynamically build the full routes from service schema.
 				autoAliases: true,
 
-				aliases: { "POST /auth": "auth.login" },
+				aliases: { "POST /auth": "auth.login", "POST /company": "company.list" },
 
 				/** 
 				 * Before call hook. You can check the request.

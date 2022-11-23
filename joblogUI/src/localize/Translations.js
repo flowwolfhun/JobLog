@@ -1,6 +1,10 @@
 exports.Translations = {
     hu:{
         login:"Belépés",
+        save: "Mentés",
+        edit: "Szerkeszt",
+        modify: "Módosít",
+        cancel: "Mégse",
         password: "Jelszó",
         email: "E-mail",
         password2:"Jelszó ismét",
@@ -21,10 +25,18 @@ exports.Translations = {
             company: "Társaság"
 
         },
-        alreadyRegistered:'Ezzel az email címmel már regisztráltak korábban'
+        alreadyRegistered:'Ezzel az email címmel már regisztráltak korábban',
+        company:{
+            name:"Társaság neve",
+            nameRequired: "Nevet meg kell adni"
+        }
     },
     en:{
         login:"Login",
+        save: "Save",
+        edit: "Edit",
+        modify: "Modify",
+        cancel: "Cancel",
         password: "Password",
         email: "Email",
         password2:"Password repeat",
@@ -43,6 +55,11 @@ exports.Translations = {
             timeRecord: "Time record",
             project: "Project",
             company: "Company"
+        },
+        alreadyRegistered:'This email address currently registered',
+        company:{
+            name:"Company name",
+            nameRequired: "Name is required"
         }
     }
 }
