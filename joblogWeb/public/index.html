@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <link rel="stylesheet" href="./Content/site.css"/>
+
+        <link rel="stylesheet" href="./Content/fontawesome_all.css"/>
+        <link rel="stylesheet" href="./Content/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./Content/mdb.min.css"/>
+
+        <script type="text/javascript">
+                  var _MDBcolor = 'blue-gradient';
+                //var _MDBcolorSec = 'rgba-red-light';
+                var _MDBcolorSec = 'blue lighten-3';
+            var userroleid = 0;
+            var pageurl = 'http://localhost:3000/'
+            var layoutLoaded = false;
+        </script>
+
+
+        <script src="./Scripts/jquery-3.4.1.min.js"></script>
+        <script src="./Scripts/popper.min.js"></script>
+        <script src="./Scripts/bootstrap.min.js"></script>
+        <script src="./Scripts/mdb.min.js"></script>
+        <script src="./Scripts/gijgo.min.js"></script>
+        <script src="./Scripts/daterangepicker.js"></script>
+        <script src="./Scripts/JqueryExtends.js"></script>
+        <script src="./Scripts/global.js"></script>        
+        <script src="./Scripts/util.js"></script>
+        <script src="./Scripts/fwControls.js"></script>
+        <script src="./Scripts/MainPageClass.js"></script>
+        <script src="./Scripts/Account.js"></script>
+
+        <script src="./Scripts/Home.js"></script>
+        <script src="./Scripts/jquery.circliful.min.js"></script>
+
+    </head>
+    <body>
+
+
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark blue-gradient">
+                <div class="container">
+        
+                    <a href="." class="navbar-brand">
+                        <img src="~/Content/Images/sb_logo.png" style="height: 40px"/>
+                    <strong>
+                        JobLog
+                    </strong></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+        
+                            <li class="nav-item" style="display:none" data-attr-showonrole="1,2">
+                                <a href="~/company/SelfCompanySetting" class="nav-link pointer">
+                                    <i class="fas fa-cog" aria-hidden="true"></i>
+                                    Saját adatok
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="1">
+                                <a href="~/company/List" class="nav-link pointer">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                    Ügyfelek
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="2">
+                                <a href="~/uploadedDocument/UploadDocument" class="nav-link pointer">
+                                    <i class="fas fa-folder-plus" aria-hidden="true"></i>
+                                    Feltöltés
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="1">
+                                <a href="~/uploadedDocument/DocumentCompanyList" class="nav-link pointer">
+                                    <i class="fas fa-folder" aria-hidden="true"></i>
+                                    Dokumentumok
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="2">
+                                <a href="~/uploadedDocument/DocumentListView" class="nav-link pointer">
+                                    <i class="fas fa-folder" aria-hidden="true"></i>
+                                    Dokumentumok
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="1">
+                                <a href="~/uploadedDocument/DownloadSchedule" class="nav-link pointer">
+                                    <i class="fas fa-folder-minus" aria-hidden="true"></i>
+                                    Letöltések
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="1,2">
+                                <a href="~/message/ViewMessage" class="nav-link pointer">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    Üzenetek
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="1,2">
+                                <a href="~/navonline/List" class="nav-link pointer">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    NAV
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item" style="display:none" data-attr-showonrole="0">
+                                <a href="~/account/Registration" class="nav-link pointer">
+                                    Regisztráció
+                                </a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="0">
+                                <a id="btnlogin" data-nonavigate="true" class="nav-link pointer">Bejelentkezés</a>
+                            </li>
+                            <li class="nav-item" style="display:none" data-attr-showonrole="1,2">
+                                <a id="btnlogout" data-nonavigate="true" class="nav-link pointer">Kijelentkezés</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+
+
+        <div class="page-content container body-content"><!-- Your content goes here --></div>
+        <script type="text/javascript">
+            
+            function ScriptLoaded() {
+                AccountClass.SetItemToRole();
+                HashChange();
+            }
+            
+            var pageContent = null //=>last.js-ben töltve jquery késleltetett töltés miatt //$(".page-content");
+            layoutLoaded = true;
+        </script>
+        <script src="./Scripts/last.js"></script>
+    </body>
+</html>
